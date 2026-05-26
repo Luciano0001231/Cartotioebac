@@ -23,7 +23,7 @@ int registro() //funçao resposavel por cadastrar usuarios no sitema
   	
   	FILE *file; // Cria o arquivo
   	file = fopen(arquivo, "w"); // Cria o arquivo e o "w" significa escrever 
-  	fprintf(file,cpf); // salva valor da variavel 
+  	fprintf(file,"%s", cpf); // salva valor da variavel 
   	fclose(file); // fecha o arquivo 
   	
   	file = fopen(arquivo, "a");
@@ -34,7 +34,7 @@ int registro() //funçao resposavel por cadastrar usuarios no sitema
 	scanf("%s",nome);
 	
 	file = fopen(arquivo, "a");
-	fprintf(file,nome);
+	fprintf(file,"%s", nome);
 	fclose(file);
 	
 	file = fopen(arquivo, "a");
@@ -45,7 +45,7 @@ int registro() //funçao resposavel por cadastrar usuarios no sitema
 	scanf("%s",sobrenome);
 	
 	file = fopen(arquivo, "a");
-	fprintf(file,sobrenome);
+	fprintf(file,"%s", sobrenome);
 	fclose(file);
 	
 	file = fopen(arquivo, "a");
@@ -56,7 +56,7 @@ int registro() //funçao resposavel por cadastrar usuarios no sitema
 	scanf("%s",cargo);
 	
 	file = fopen(arquivo, "a");
-	fprintf(file,cargo);
+	fprintf(file,"%s", cargo);
 	fclose(file);	
   	
   	system("pause"); //pausa o sistema na tela atual 
@@ -109,7 +109,7 @@ int deletar() // funçao responsavel por deletar o usuarios
    if (file == NULL)  // Em caso de numero digitado não encontrado no arquivo
    {
     
-   	printf("CPF inválido! \n"); //Essa mensagem é exibida ao usuario 
+   	printf("CPF inválido! \n\n"); //Essa mensagem é exibida ao usuario 
    	system("pause"); //Comando que pausa na tela atual 
    	return 0; //Comando que faz o usuario retornar a tela inicial 
    	
@@ -135,14 +135,14 @@ int deletar() // funçao responsavel por deletar o usuarios
     system("pause");
    }
    
-   else if (opcao == 'n' || 'N')
+   else if (opcao == 'n' || opcao == 'N')
    { printf("Retorne ao menu principal\n");
      system("pause");
    }
    
    else 
    { printf("Opção inválida");  //caso cpf do usuario não seja encontrado 
-     sytem("pause");
+     system("pause");
 	  }   
     
 }
@@ -151,56 +151,73 @@ int main ()
 {
 	int opcao=0; //Definindo variáveis 
 	int laco=1;
+	char senhadigitada[20]="a";
+	int comparacao;
 	
-	for (laco=1;laco=1;)
+    printf("### Cartório da EBAC ###\n\n");
+    printf("Loging de administrador!\n\nDigite a sua senha:");
+    scanf("%s", senhadigitada);
+    comparacao = strcmp(senhadigitada,"admin");
+    if(comparacao == 0) 
 	{
+		for (laco=1; laco==1;)
+	   {
 		
-		system("cls"); // responsavel por limpar a tela
+		 system("cls"); // responsavel por limpar a tela
 	
-		setlocale(LC_ALL, "Portuguese"); //Definindo linguagem 
+	 	setlocale(LC_ALL, "Portuguese"); //Definindo linguagem 
   
   
-		printf("### Cartório da EBAC ###\n\n"); //Inicio do menu
-		printf("Escolha a opção desejada no menu:\n\n");
-		printf("\t1 - Resgistrar nomes\n");
-		printf("\t2 - Consultar nomes\n");
-		printf("\t3 - Deletar nomes\n"); 
-		printf("\t4 - Sair do sistema\n\n");
-		printf("Opção: "); //Fim do menu
+	 	 printf("### Cartório da EBAC ###\n\n"); //Inicio do menu
+	 	 printf("Escolha a opção desejada no menu:\n\n");
+		 printf("\t1 - Resgistrar nomes\n");
+		 printf("\t2 - Consultar nomes\n");
+	 	 printf("\t3 - Deletar nomes\n"); 
+	 	 printf("\t4 - Sair do sistema\n\n");
+		 printf("Opção: "); //Fim do menu
 	
-		scanf("%d", &opcao); //armazenando a escolha do usuário 
+	 	 scanf("%d", &opcao); //armazenando a escolha do usuário 
 	
-		system("cls");
+		 system("cls");
 		
-		switch(opcao)
-		{ 
-			case 1:
-			registro();
-			break;
+		 switch(opcao)
+  		 { 
+		 	case 1:
+	 		registro();
+	 		break;
 			
-			case 2: 
-			consulta();
+	 		case 2: 
+	 		consulta();
 	     	break;
 			
-			case 3:
-			deletar();
-			break;
+		 	case 3:
+	 		deletar();
+	 		break;
 			
-			case 4:
-			printf("Obrigado por utilizar o sistema!\n");
-			return 0;
-			break;
+		 	case 4:
+		 	printf("Obrigado por utilizar o sistema!\n");
+		 	return 0;
+		 	break;
 			
-			default:
-			printf("Essa opção não está disponivel!\n");
-			system("pause");
-			break;
+		 	default:
+		 	printf("Essa opção não está disponivel!\n");
+		 	system("pause");
+		 	break;
 			
 		}
 		// >=4 da erro, || significa ou <=0 tambem dará erro e mostrará a mensagem 
-	}
+    }
 }
-		
+else
+{
+	printf("Senha incorreta!");
+}
+	
+	return 0;
+}
+    
+  
+
 	
 	
 
